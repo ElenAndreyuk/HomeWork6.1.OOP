@@ -1,5 +1,7 @@
 package Model;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +9,21 @@ import java.util.List;
 public class FileManager {
     private String fileName;
 
+//    public FileManager(String fileName) {
+//        this.fileName = fileName;
+//    }
+
+
     public FileManager(String fileName) {
         this.fileName = fileName;
+        try (FileWriter writer = new FileWriter(fileName, true)) {
+            writer.flush();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
-    public void saveAllLines(List<String> lines){
+    public void saveAllLines(@NotNull List<String> lines){
         try (FileWriter writer = new FileWriter(fileName, false)) {
             for (String line : lines) {
                 writer.write(line);
@@ -22,6 +34,8 @@ public class FileManager {
             System.out.println(ex.getMessage());
         }
     }
+
+
     public List<String> readAllLines() {
         List<String> lines = new ArrayList<>();
         try {

@@ -1,15 +1,18 @@
 package View;
 
 import Controller.NoteController;
+import Model.ConsoleLogger;
 import Model.Note;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class ViewUser {
+public class ViewNote {
     private NoteController noteController;
+    private ConsoleLogger consoleLogger;
 
-    public ViewUser(NoteController noteController) {
+    public ViewNote(NoteController noteController) {
+
         this.noteController = noteController;
     }
     public void run() throws Exception {
@@ -37,11 +40,11 @@ public class ViewUser {
                         String numId = prompt("Идентификатор заметки для замены: ");
                         noteController.updateNote(numId, createNote());
                         break;
-//                    case DELETE:
-//                        String numID = prompt("Идентификатор пользователя: ");
-//                        userController.deleteUser(numID);
-//                        System.out.println(numID + " удален");
-//                        break;
+                    case DELETE:
+                        String numID = prompt("Идентификатор заметки для удаления: ");
+                        noteController.deleteNote(numID);
+                        System.out.println(numID + " удален");
+                        break;
                 }
             } catch (Exception e) {
                 System.out.println("Oops!\n" + e.getMessage());

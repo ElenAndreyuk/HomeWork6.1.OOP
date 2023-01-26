@@ -1,14 +1,14 @@
 import Controller.NoteController;
 import Model.FileManager;
 import Model.Repository;
-import View.ViewUser;
+import View.ViewNote;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         FileManager fileManager = new FileManager("notes.txt");
         Repository repository = new Repository(fileManager);
         NoteController controller = new NoteController(repository);
-        ViewUser view = new ViewUser(controller);
-        view.run();
+        ViewNote viewNote = new ViewNote(controller);
+        viewNote.run();
     }
 }

@@ -8,12 +8,8 @@ public class Note extends NoteAbstract{
     public Note(String title, String data) {
         super(title, data);
     }
-
-    @Override
-    public void setId(String id) {
+    public Note(String id, String title, String data) {
+        this(title, data);
         this.id = id;
     }
-
-
-
 }

@@ -14,7 +14,6 @@ public class NoteController {
 
     public void saveNote(Note note) {
         repository.createNote(note);
-
     }
 
     public Note readNote(String id) {
@@ -26,8 +25,13 @@ public class NoteController {
         return result;
     }
 
-    public void updateNote(String id, Note note)  {
+    public void updateNote(String id, Note note) {
         note.setId(id);
         repository.updateNote(id, note);
+    }
+
+    public void deleteNote(String id)  {
+        List<Note> notes = repository.getAllNotes();
+        repository.deleteNote(id);
     }
 }

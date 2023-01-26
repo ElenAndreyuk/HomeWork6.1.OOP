@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Repository implements Storable {
+    private NoteMapper mapper = new NoteMapper();
+
     private FileManager fileManager;
 
     public Repository(FileManager fileManager) {
@@ -33,12 +35,21 @@ public class Repository implements Storable {
         List<String> lines = fileManager.readAllLines();
         List<Note> notes = new ArrayList<>();
         for (String line : lines) {
-            String[] tmp = line.split("//");
-            Note res = new Note(tmp[1], tmp[2]);
-            notes.add(res);
+            notes.add(mapper.map(line));
         }
         return notes;
     }
+//    @Override
+//    public List<Note> getAllNotes() {
+//        List<String> lines = fileManager.readAllLines();
+//        List<Note> notes = new ArrayList<>();
+//        for (String line : lines) {
+//            String[] tmp = line.split(",");
+//            Note res = new Note(tmp[1], tmp[2]);
+//            notes.add(res);
+//        }
+//        return notes;
+//    }
 
 
     @Override
@@ -70,11 +81,13 @@ public class Repository implements Storable {
     private void writeDown(List<Note> notes) {
         List<String> lines = new ArrayList<>();
         for (Note note : notes) {
-            String res = String.format("%s//%s//%s", note.getId(), note.getTitle(), note.getData());
-            lines.add(res);
+//            String res = String.format("%s,%s,%s", note.getId(), note.getTitle(), note.getData());
+            lines.add(mapper.map(note));
         }
-        fileManager.saveAllLines(lines);//!
+        fileManager.saveAllLines(lines);
     }
+
+
 //    public String map(User user) {
 //        return String.format("%s,%s,%s,%s", user.getId(), user.getFirstName(), user.getLastName(), user.getPhone());
 //    }

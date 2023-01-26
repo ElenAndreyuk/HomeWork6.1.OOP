@@ -11,6 +11,8 @@ public abstract class NoteAbstract {
         this.data = data;
     }
 
+
+
     public String getId() {
         return id;
     }
@@ -34,7 +36,4 @@ public abstract class NoteAbstract {
     public void setData(String data) {
         this.data = data;
     }
-
-
-
 }
