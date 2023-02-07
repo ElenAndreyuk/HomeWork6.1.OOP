@@ -1,7 +1,7 @@
 package View;
 
 import Controller.NoteController;
-import Model.ConsoleLogger;
+import Model.log.ConsoleLogger;
 import Model.Note;
 
 import java.util.List;
@@ -16,6 +16,14 @@ public class ViewNote {
         this.noteController = noteController;
     }
     public void run() throws Exception {
+        System.out.println("Список команд:");
+        System.out.println(" NONE,\n" +
+                "    READ,\n" +
+                "    CREATE,\n" +
+                "    UPDATE,\n" +
+                "    ALL,\n" +
+                "    DELETE,\n" +
+                "    EXIT");
         Command com = Command.NONE;
 
         while (true) {
@@ -47,7 +55,7 @@ public class ViewNote {
                         break;
                 }
             } catch (Exception e) {
-                System.out.println("Oops!\n" + e.getMessage());
+                System.out.println("что-то пошло не так...\n" + e.getMessage());
             }
         }
     }
@@ -61,7 +69,6 @@ public class ViewNote {
     private Note createNote() {
         String title = prompt("Заголовок:  ");
         String data = prompt("Заметка: ");
-        Note note = new Note(title, data);
-        return note;
+        return new Note(title, data);
     }
 }

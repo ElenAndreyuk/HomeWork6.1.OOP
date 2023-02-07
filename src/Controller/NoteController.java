@@ -21,17 +21,21 @@ public class NoteController {
     }
 
     public List<Note> readList() {
-        List<Note> result = repository.getAllNotes();
-        return result;
+        return repository.getAllNotes();
     }
 
     public void updateNote(String id, Note note) {
         note.setId(id);
-        repository.updateNote(id, note);
+        repository.updateNote(id, note);//!! repository.updateNote(updatedNote);
     }
 
     public void deleteNote(String id)  {
         List<Note> notes = repository.getAllNotes();
         repository.deleteNote(id);
     }
+//    public void noteDelete(String id) {
+//        Note note = repository.getAllNotes().stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
+//        System.out.println(note);
+//        repository.deleteNote(note);
+//    }
 }

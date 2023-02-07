@@ -9,10 +9,6 @@ import java.util.List;
 public class FileManager {
     private String fileName;
 
-//    public FileManager(String fileName) {
-//        this.fileName = fileName;
-//    }
-
 
     public FileManager(String fileName) {
         this.fileName = fileName;
@@ -27,7 +23,7 @@ public class FileManager {
         try (FileWriter writer = new FileWriter(fileName, false)) {
             for (String line : lines) {
                 writer.write(line);
-                writer.append('\n');
+                writer.append("\n");
             }
             writer.flush();
         } catch (IOException ex) {
@@ -53,12 +49,13 @@ public class FileManager {
                 }
             }
             fr.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        }  catch (IOException e) {
             e.printStackTrace();
         }
         return lines;
     }
+//    catch (FileNotFoundException e) {
+//        e.printStackTrace();
+//    }
 
 }

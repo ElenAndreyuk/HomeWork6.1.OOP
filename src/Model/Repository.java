@@ -1,5 +1,7 @@
 package Model;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +15,11 @@ public class Repository implements Storable {
     }
 
     @Override
-    public String createNote(Note note) {
+    public void createNote(Note note) {
         List<Note> notes = getAllNotes();
         int max = 0;
         for (Note item : notes) {
-            int id = Integer.parseInt(item.getId());
+            int id = Integer.parseInt(item.getId()); //!!!!!!!!!!!
             if (max < id) {
                 max = id;
             }
@@ -26,8 +28,8 @@ public class Repository implements Storable {
         String id = String.format("%d", newId);
         note.setId(id);
         notes.add(note);
-        writeDown(notes);
-        return id;
+        writeToFile(notes);
+//        return id;
     }
 
     @Override
@@ -39,17 +41,6 @@ public class Repository implements Storable {
         }
         return notes;
     }
-//    @Override
-//    public List<Note> getAllNotes() {
-//        List<String> lines = fileManager.readAllLines();
-//        List<Note> notes = new ArrayList<>();
-//        for (String line : lines) {
-//            String[] tmp = line.split(",");
-//            Note res = new Note(tmp[1], tmp[2]);
-//            notes.add(res);
-//        }
-//        return notes;
-//    }
 
 
     @Override
@@ -58,7 +49,7 @@ public class Repository implements Storable {
         Note toEdit = notes.stream().filter(i -> i.getId().equals(id)).findFirst().get();
         toEdit.setTitle(note.getTitle());
         toEdit.setData(note.getData());
-        writeDown(notes);
+        writeToFile(notes);
 
     }
 
@@ -67,35 +58,28 @@ public class Repository implements Storable {
         List<Note> notes = getAllNotes();
         Note toDelete = notes.stream().filter(i -> i.getId().equals(id)).findFirst().get();
         notes.remove(toDelete);
-        writeDown(notes);
+        writeToFile(notes);
     }
 
     @Override
     public Note readNote(String id) {
         List<Note> notes = getAllNotes();
-        Note toRead = notes.stream().filter(i -> i.getId().equals(id)).findFirst().get();
-        return toRead;
+        for (Note note : notes) {
+            if (note.getId().equals(id)) {
+                return note;
+            }
+        }
+//        Note toRead = notes.stream().filter(i -> i.getId().equals(id)).findFirst().get();
+        return null;
     }
 
 
-    private void writeDown(List<Note> notes) {
+    private void writeToFile(@NotNull List<Note> notes) {
         List<String> lines = new ArrayList<>();
         for (Note note : notes) {
-//            String res = String.format("%s,%s,%s", note.getId(), note.getTitle(), note.getData());
             lines.add(mapper.map(note));
         }
         fileManager.saveAllLines(lines);
     }
-
-
-//    public String map(User user) {
-//        return String.format("%s,%s,%s,%s", user.getId(), user.getFirstName(), user.getLastName(), user.getPhone());
-//    }
-//
-//    public User map(String line) {
-//        String[] lines = line.split(",");
-//        return new User(lines[0], lines[1], lines[2], lines[3]);
-//    }
-
 
 }
