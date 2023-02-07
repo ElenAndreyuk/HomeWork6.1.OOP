@@ -1,7 +1,6 @@
 package Model;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class Repository implements Storable {
         List<Note> notes = getAllNotes();
         int max = 0;
         for (Note item : notes) {
-            int id = Integer.parseInt(item.getId()); //!!!!!!!!!!!
+            int id = Integer.parseInt(item.getId());
             if (max < id) {
                 max = id;
             }
@@ -69,7 +68,6 @@ public class Repository implements Storable {
                 return note;
             }
         }
-//        Note toRead = notes.stream().filter(i -> i.getId().equals(id)).findFirst().get();
         return null;
     }
 

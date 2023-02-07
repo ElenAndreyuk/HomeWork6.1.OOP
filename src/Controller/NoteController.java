@@ -1,14 +1,14 @@
 package Controller;
 
 import Model.Note;
-import Model.Repository;
+import Model.Storable;
 
 import java.util.List;
 
 public class NoteController {
-    private final Repository repository;
+    private final Storable repository;
 
-    public NoteController(Repository repository) {
+    public NoteController(Storable repository) {
         this.repository = repository;
     }
 
@@ -33,9 +33,4 @@ public class NoteController {
         List<Note> notes = repository.getAllNotes();
         repository.deleteNote(id);
     }
-//    public void noteDelete(String id) {
-//        Note note = repository.getAllNotes().stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
-//        System.out.println(note);
-//        repository.deleteNote(note);
-//    }
 }

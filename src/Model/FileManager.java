@@ -54,8 +54,5 @@ public class FileManager {
         }
         return lines;
     }
-//    catch (FileNotFoundException e) {
-//        e.printStackTrace();
-//    }
 
 }

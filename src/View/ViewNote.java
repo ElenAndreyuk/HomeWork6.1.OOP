@@ -1,15 +1,12 @@
 package View;
-
 import Controller.NoteController;
-import Model.log.ConsoleLogger;
 import Model.Note;
-
 import java.util.List;
 import java.util.Scanner;
 
 public class ViewNote {
     private NoteController noteController;
-    private ConsoleLogger consoleLogger;
+
 
     public ViewNote(NoteController noteController) {
 
